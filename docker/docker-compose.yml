@@ -1,0 +1,36 @@
+version: '3.0'
+services:
+  main:
+    container_name: flask-site
+    restart: always
+    env_file: .env
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    networks:
+      - db_network
+    volumes:
+      - ../app:/usr/src/app/app
+      - ../logs:/usr/src/app/logs
+      - ../migrations:/usr/src/app/migrations
+
+  db:
+    image: postgres:10.4
+    restart: always
+    environment:
+      POSTGRES_USER: deploy
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: stories
+    ports:
+     - "5442:5432"
+    networks:
+      - db_network
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+networks:
+  db_network:
+    driver: bridge
+ 
