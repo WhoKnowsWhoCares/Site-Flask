@@ -20,9 +20,9 @@ services:
     image: postgres:10.4
     restart: always
     environment:
-      POSTGRES_USER: deploy
+      POSTGRES_USER: alexander
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: stories
+      POSTGRES_DB: site_db
     ports:
      - "5442:5432"
     networks:
