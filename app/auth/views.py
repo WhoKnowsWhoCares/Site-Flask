@@ -1,11 +1,8 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, logout_user, login_required, \
-    current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
-from .. import db
 from ..models import User
-from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
-    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+from .forms import LoginForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -20,7 +17,8 @@ def login():
                 next = url_for('main.index')
             return redirect(next)
         flash('Invalid email or password.')
-    return render_template('auth/sign-in.html', form=form)
+    return redirect(url_for('main.index'))
+    # return render_template('auth/sign-in.html', form=form)
 
 
 @auth.route('/logout')

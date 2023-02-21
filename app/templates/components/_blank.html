@@ -8,14 +8,6 @@
 
 
 <body>
-    <div class="container">
-        {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
-        </div>
-        {% endfor %}
-    </div>
     <main>
         <div class="preloader bg-dark flex-column justify-content-center align-items-center">
             <svg id="loader-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 64 78.4">
@@ -35,6 +27,14 @@
         </div>    
     </main>
 
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    
     {% block page_content %}{% endblock %}
 
     {% block scripts %}

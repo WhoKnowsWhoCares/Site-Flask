@@ -46,3 +46,8 @@ nosetests.xml
 
 # Config file
 .env
+
+#Dev files
+app/templates/examples/
+app/static/assets/img/
+app/static/assets/vendor/
