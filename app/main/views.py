@@ -1,17 +1,19 @@
-from flask import render_template, request, flash
+from flask import redirect, render_template, url_for, request, flash
 from flask_login import login_required
-from .forms import SubmitForm
+from .forms import MessageForm
 from . import main
 import os
 import telebot
+
+bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
 
 @main.route('/')
 def index():
     return render_template('index.html')
 
-@main.route('/about')
-def about():
-    return render_template('about.html')
+# @main.route('/about')
+# def about():
+#     return render_template('about.html')
     
 # @main.route('/projects')
 # def projects():
@@ -34,21 +36,14 @@ def trade4me():
 def panel():
     return render_template('panel.html')
 
-@main.route('/telegram', methods=['POST'])
-def telegram():
-    form = SubmitForm()
-    # if form.validate_on_submit():
-    name = form.name
-    email = form.email
-    message = form.message
 
-    # token = os.getenv('TG_API_KEY')
-    # url = f"https://api.telegram.org/bot{token}/sendMessage"
-    # chat_id=os.getenv('TG_USER_ID')
-    # data = {"chat_id": chat_id, "text": f'User {name}, email {email}, sent message: {message}'}
-    # requests.post(url, data=data)
-    
-    bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
-    bot.send_message(os.getenv('TG_USER_ID'), f'User {name}, email {email}, sent message: {message}')
-    flash('I will contact you soon')
-    return render_template('about.html')
+@main.route('/about', methods=['GET', 'POST'])
+def about():
+    form = MessageForm()
+    if request.method == 'POST':
+        name = form.name.data
+        email = form.email.data
+        message = form.message.data
+        bot.send_message(os.getenv('TG_USER_ID'), f'User {name}, email {email}, sent message: {message}')
+        return redirect(url_for('main.about'))
+    return render_template('about.html', form=form)

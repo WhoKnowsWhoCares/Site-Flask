@@ -1,12 +1,14 @@
 {% extends "components/_base.html" %}
 
 {% block page_content %}
-        <!-- Hero -->
+
+<!-- Hero -->
 <section class="section-header bg-secondary text-white">
     <div class="container">
+        
         <div class="row justify-content-between align-items-center">
             <div class="col-12 col-md-7 col-lg-6 text-center text-md-left">
-                <h1 class="display-2 mb-4">About Me<br class="d-none d-md-inline">Summary</h1>
+                <h1 class="display-2 mb-4">Summary</h1>
                 <p class="lead mb-4 text-muted">Themesberg can help you build a modern website, a creative logo or PWA, that will bring you customers and and stay on top of your competition.</p>
         
             </div>
@@ -159,7 +161,7 @@
                         <!-- Timeline Item 3 -->
                         <div class="timeline-item">
                             <h3 class="h4 mb-4">Our office</h3>
-                            <img class="mt-2" src="../static/assets/img/office.png" alt="Themesberg workspace" width="300">
+                            <img class="mt-2" src="../static/assets/img/_me/photo2-1_1.jpg" alt="Themesberg workspace" width="300">
                             <p>AngularJS is a JavaScript-based open-source front-end web application framework mainly maintained by Google and by a community of individuals and corporations to address many of the challenges encountered in developing
                                 single-page applications.
                             </p>
@@ -193,13 +195,14 @@
                         <h2>Contact Me</h2>
                     </div>
                     <div class="card-body pt-0">
-                        <form action="/telegram", method="post">
+                        <form method="post" name="msgform" id="msgform" target="hidden_iframe" onsubmit="submitted=true;">
+                            {{ form.hidden_tag() }}
                             <!-- Form -->
                             <div class="mb-4">
                                 <label for="name">Your Name</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-circle"></span></span>
-                                    <input type="text" class="form-control" placeholder="e.g. Bonnie Green" id="name" required>
+                                    <input type="text" class="form-control" placeholder="e.g. Bonnie Green" id="name" name="name" required>
                                 </div>
                             </div>
                             <!-- End of Form -->
@@ -208,19 +211,20 @@
                                 <label for="email">Your Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon4"><span class="fas fa-envelope"></span></span>
-                                    <input type="email" class="form-control" placeholder="example@company.com" id="email" required>
+                                    <input type="email" class="form-control" placeholder="example@company.com" id="email" name="email" required>
                                 </div>
                             </div>
                             <!-- End of Form -->
                             <div class="mb-4">
                                 <label for="message">Your Message</label>
-                                <textarea placeholder="Your message" class="form-control" id="message" rows="4" required></textarea>
+                                <textarea placeholder="Your message" class="form-control" id="message" name="message" rows="4" required></textarea>
                             </div>
                             <!-- End of Form -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-secondary">Send message</button>
+                                <button type="submit" name="submit" class="btn btn-secondary">Send message</button>
                             </div>
                         </form>
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>
                     </div>
                 </div>
                 <!-- End of Contact Card -->

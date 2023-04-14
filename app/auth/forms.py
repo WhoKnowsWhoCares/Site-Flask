@@ -6,10 +6,9 @@ from ..models import User
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64),
-                                             Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log In')
+    email = StringField('email', validators=[DataRequired(), Length(1, 64), Email()])
+    password = PasswordField('password', validators=[DataRequired()])
+    submit = SubmitField('submit')
 
 
 class RegistrationForm(FlaskForm):
