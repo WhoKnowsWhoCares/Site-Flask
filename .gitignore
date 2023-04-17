@@ -47,6 +47,9 @@ nosetests.xml
 # Config file
 .env
 
+# Poetry lock
+poetry.lock
+
 #Dev files
 app/templates/examples/
 app/static/assets/img/
