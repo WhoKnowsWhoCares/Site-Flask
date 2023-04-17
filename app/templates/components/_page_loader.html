@@ -2,6 +2,13 @@
     <div class="preloader bg-dark flex-column justify-content-center align-items-center">
         <svg id="loader-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 64 78.4">
         </svg>
+
+        <div class="loader">
+            <span class="loader-text"></span>
+            <span class="load"></span>
+        </div>
+        <br>
+
         <div class="container flashed-messages" id="flashed-messages">
             {% for message in get_flashed_messages() %}
                 <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
