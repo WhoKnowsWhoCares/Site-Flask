@@ -12,12 +12,12 @@ services:
     networks:
       - db_network
     volumes:
-      - ../app:/usr/src/app/app
-      - ../logs:/usr/src/app/logs
-      - ../migrations:/usr/src/app/migrations
+      - ./app:/usr/src/app/app
+      - ./logs:/usr/src/app/logs
+      - ./migrations:/usr/src/app/migrations
 
   db:
-    image: postgres:10.4
+    image: postgres:14.7
     restart: always
     environment:
       POSTGRES_USER: alexander
@@ -28,7 +28,7 @@ services:
     networks:
       - db_network
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/docker/volumes/postgresql_data/_data
 
 networks:
   db_network:

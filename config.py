@@ -12,7 +12,6 @@ class Config:
     TG_USER_ID = os.getenv('TG_USER_ID', None)
 
     DEBUG = (os.getenv('DEBUG', 'False') == 'True')
-    # ADMIN = os.getenv('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
@@ -21,17 +20,14 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    # DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 
 
 class TestingConfig(Config):
-    TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 
 class ProductionConfig(Config):
-    # DEBUG = False
 
     # Security
     SESSION_COOKIE_HTTPONLY = True
@@ -45,7 +41,6 @@ class ProductionConfig(Config):
     DB_NAME     = os.getenv('DATABASE_NAME', None)
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.\
         format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
-    print(SQLALCHEMY_DATABASE_URI)
 
 
 

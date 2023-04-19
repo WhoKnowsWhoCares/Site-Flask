@@ -11,14 +11,6 @@ bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
 def index():
     return render_template('index.html')
 
-# @main.route('/about')
-# def about():
-#     return render_template('about.html')
-    
-# @main.route('/projects')
-# def projects():
-#     return render_template('projects.html')
-
 @main.route('/ihome')
 def ihome():
     return render_template('ihome.html')

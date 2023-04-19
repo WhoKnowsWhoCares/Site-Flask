@@ -7,7 +7,7 @@ reload = True
 bind = '0.0.0.0:8000'
 
 #workers
-workers = 1
+workers = 4
 
 # Logger Configurations
 errorlog = '-'
