@@ -21,6 +21,3 @@ def test(test_names):
     else:
         tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0')

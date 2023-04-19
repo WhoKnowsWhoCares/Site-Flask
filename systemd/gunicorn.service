@@ -6,7 +6,7 @@ After=network.target
 Group=www-data
 WorkingDirectory=dbms_template_path
 Environment="PATH=dbms_template_path/.venv/bin"
-ExecStart=dbms_template_path/.venv/bin/gunicorn --workers 5 --bind unix:dbms_template_path/gunicorn/gunicorn.sock wsgi:app --access-logfile dbms_template_path/gunicorn/access.log --error-logfile dbms_template_path/gunicorn/error.log
+ExecStart=dbms_template_path/.venv/bin/gunicorn --workers 3 --bind unix:dbms_template_path/gunicorn/gunicorn.sock wsgi:app --access-logfile dbms_template_path/gunicorn/access.log --error-logfile dbms_template_path/gunicorn/error.log
 Restart=on-failure
 
 [Install]
