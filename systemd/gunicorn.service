@@ -3,7 +3,6 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=www
 Group=www-data
 WorkingDirectory=dbms_template_path
 Environment="PATH=dbms_template_path/.venv/bin"
