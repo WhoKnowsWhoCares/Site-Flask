@@ -1,5 +1,8 @@
 FROM python:3.10
 
+# Set the working directory to /app
+WORKDIR /app
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
