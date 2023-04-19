@@ -7,6 +7,7 @@ project_path=`pwd`
 
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
+sudo -u postgres export PATH=$PATH:/usr/lib/postgresql/14/bin
 
 read -p "Your domain without protocol (for example, google.com): " project_domain
 read -p "Your name for database: " db_name
