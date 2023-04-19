@@ -21,7 +21,7 @@ pip install flask gunicorn
 pip install -r requirements.txt
 
 sed -i "s~dbms_template_path~$project_path~g" nginx/site.conf systemd/gunicorn.service
-sed -i "s~dbms_template_domain~$project_domain~g" nginx/site.conf src/config/settings.py
+sed -i "s~dbms_template_domain~$project_domain~g" nginx/site.conf
 
 sudo ln -s $project_path/nginx/site.conf /etc/nginx/sites-enabled/
 sudo ln -s $project_path/systemd/gunicorn.service /etc/systemd/system/
