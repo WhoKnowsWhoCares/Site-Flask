@@ -35,3 +35,9 @@
       $('#flashed-messages').fadeOut('slow');
   }, 1300);
 </script>
+<script type="text/javascript">
+    // Get the current page name from the URL
+    var currentPage = location.pathname.split('/').pop();
+    // Set the page title dynamically
+    document.getElementById('pageTitle').innerHTML = currentPage;
+</script>
