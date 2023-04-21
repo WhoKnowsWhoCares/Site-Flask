@@ -12,18 +12,13 @@ $ sudo git clone https://github.com/whoknowswhocares/site-flask.git /var/www/sit
 $ sudo chown -R $USER:www-data /var/www/site-flask
 ```
 
-Change environment variables
-```
-$ sudo mv .env.template .env
-```
-> Now change file .env
-
 Run script to create python environment and configure nginx and gunicorn
 ```
 $ cd /var/www/site-flask
 $ chmod +x install.sh
 $ ./install.sh
 ```
+> Now change file .env, .pgpass
 
 
 ## Database management
