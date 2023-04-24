@@ -12,6 +12,7 @@ class Config:
     TG_USER_ID = os.getenv('TG_USER_ID', None)
 
     DEBUG = (os.getenv('DEBUG', 'False') == 'True')
+    TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
@@ -25,6 +26,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    TESTING = True
 
 
 class ProductionConfig(Config):

@@ -21,6 +21,13 @@ $ ./install.sh
 > Now change file .env, .pgpass
 
 
+## Use poetry as package manager
+$ curl -sSL https://install.python-poetry.org | python3 -
+$ echo 'export PATH="$HOME/.local/bin:$PATH' >> ~/zshrc"
+$ poetry config virtualenvs.in-project true
+$ poetry install
+$ poetry shell
+
 ## Database management
 On production mode use postgres
 ```
