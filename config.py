@@ -32,18 +32,18 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
 
     # Security
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
-    DB_USER     = os.getenv('DATABASE_USER', None)
-    DB_PASSWORD = os.getenv('DATABASE_PASS', None)
-    DB_HOST     = os.getenv('DATABASE_HOST', None)
-    DB_PORT     = os.getenv('DATABASE_PORT', None)
-    DB_NAME     = os.getenv('DATABASE_NAME', None)
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{}:{}@{}:{}/{}'.\
+    DB_USER     = os.getenv('DATABASE_USER', 'postgres')
+    DB_PASSWORD = os.getenv('DATABASE_PASS', '')
+    DB_HOST     = os.getenv('DATABASE_HOST', 'localhost')
+    DB_PORT     = os.getenv('DATABASE_PORT', '5432')
+    DB_NAME     = os.getenv('DATABASE_NAME', 'site_db')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+pg8000://{}:{}@{}:{}/{}'.\
         format(DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
-
 
 
 config = {

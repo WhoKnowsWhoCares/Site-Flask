@@ -11,10 +11,14 @@ pip install wheel
 pip install flask gunicorn
 pip install -r requirements.txt
 
-sudo cp .env.template .env
-sudo cp .pgpass.template .pgpass
-sudo cp nginx/site.conf.template nginx/site.conf
-sudo cp systemd/gunicorn.service.template systemd/gunicorn.service
+sudo systemctl stop gunicorn
+sudo rm /etc/nginx/sites-enabled/site.conf
+sudo rm /etc/systemd/system/gunicorn.service
+
+cp .env.template .env
+cp .pgpass.template .pgpass
+cp nginx/site.conf.template nginx/site.conf
+cp systemd/gunicorn.service.template systemd/gunicorn.service
 
 sed -i "s~dbms_template_path~$project_path~g" nginx/site.conf systemd/gunicorn.service
 sed -i "s~dbms_template_domain~$project_domain~g" nginx/site.conf
