@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True)
     username = db.Column(db.String(64), unique=True)
     role = db.Column(db.Enum(UserRole), default=UserRole.USER)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(256))
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

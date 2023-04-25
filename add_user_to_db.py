@@ -1,5 +1,6 @@
 import pg8000
 import os
+import bcrypt
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,8 +19,11 @@ conn = pg8000.connect(
     password=DB_PASSWORD
 )
 
+password = "my_password".encode("utf-8") 
+hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+
 cur = conn.cursor()
-cmd = "INSERT INTO users (username, email, role, password) VALUES ('test', 'test@mail.com', '1', 'test1234');"
+cmd = f"INSERT INTO users (username, email, role, password) VALUES ('test', 'test@mail.com', '1', {hashed_password});"
 cur.execute(cmd)
 conn.commit()
 
