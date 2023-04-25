@@ -20,4 +20,4 @@ def make_shell_context():
     return dict(db=db, User=User, UserRole=UserRole) 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8080)

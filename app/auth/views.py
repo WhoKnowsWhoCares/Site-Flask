@@ -9,7 +9,7 @@ from loguru import logger
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if request.method == 'POST':
         logger.info(f'Post request to login with email: {form.email.data.lower()}')
