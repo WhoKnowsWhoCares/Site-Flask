@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request, flash
+from flask import redirect, render_template, url_for, request
 from flask_login import login_required
 from .forms import MessageForm
 from . import main
@@ -7,26 +7,36 @@ import telebot
 
 bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
 
+
 @main.route('/')
 def index():
     return render_template('index.html')
+
 
 @main.route('/ihome')
 def ihome():
     return render_template('ihome.html')
 
+
 @main.route('/mlsport')
 def mlsport():
     return render_template('mlsport.html')
+
 
 @main.route('/trade4me')
 def trade4me():
     return render_template('trade4me.html')
 
+
 @main.route('/panel')
 @login_required
 def panel():
     return render_template('panel.html')
+
+
+@main.route('/sd_art')
+def sd_art():
+    return render_template('sd_art.html')
 
 
 @main.route('/about', methods=['GET', 'POST'])

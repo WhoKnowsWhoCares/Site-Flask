@@ -4,9 +4,11 @@ from flask_login import UserMixin, AnonymousUserMixin
 from enum import Enum
 from . import db, login_manager
 
+
 class UserRole(Enum):
     USER = 1
     ADMIN = 2
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -29,7 +31,7 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
-   
+
     def can(self, role):
         return self.role is not None and self.role == role
 
@@ -46,6 +48,7 @@ class AnonymousUser(AnonymousUserMixin):
 
     def is_administrator(self):
         return False
+
 
 login_manager.anonymous_user = AnonymousUser
 
