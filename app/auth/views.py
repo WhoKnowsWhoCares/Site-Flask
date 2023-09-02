@@ -6,29 +6,28 @@ from app.models import User
 from loguru import logger
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for("main.index"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
-            next = request.args.get('next')
+            flash("Login successful.")
+            next = request.args.get("next")
             if next is None:
-                next = url_for('main.index')
-            flash('Login successful.')
+                next = url_for("main.index")
             return redirect(next)
-        flash('Invalid email or password.')
-        return redirect(url_for('auth.login'))
-    return render_template('auth/sign-in.html', form=form)
+        flash("Invalid email or password.")
+        return redirect(url_for("auth.login"))
+    return render_template("auth/sign-in.html", form=form)
 
 
-@auth.route('/logout')
+@auth.route("/logout")
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
-    return redirect(url_for('main.index'))
-
+    flash("You have been logged out.")
+    return redirect(url_for("main.index"))
