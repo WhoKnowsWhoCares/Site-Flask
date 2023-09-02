@@ -10,14 +10,14 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = LoginForm()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        if user is not None and user.verify_password(form.password.data):
+        if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
-            next = request.args.get('next')
-            if next is None or not next.startswith('/'):
-                next = url_for('main.index')
             flash('Login successful.')
+            next = request.args.get('next')
+            if next is None:
+                next = url_for('main.index')
             return redirect(next)
         flash('Invalid email or password.')
         return redirect(url_for('auth.login'))
