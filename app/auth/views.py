@@ -12,16 +12,14 @@ def login():
         logger.info('User authenticated')
         return redirect(url_for('main.index'))
     form = LoginForm()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        logger.info(f'User: {user}')
         if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
-            next = request.args.get('next')
-            if not next:
-                next = url_for('main.index')
-            logger.info(f'Next: {next}')
             flash('Login successful.')
+            next = request.args.get('next')
+            if next is None:
+                next = url_for('main.index')
             return redirect(next)
         flash('Invalid email or password.')
         logger.info(f'Login error')
