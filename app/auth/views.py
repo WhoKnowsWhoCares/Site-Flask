@@ -16,11 +16,10 @@ def login():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
+            flash('Login successful.')
             next = request.args.get('next')
             if next is None:
                 next = url_for('main.index')
-            logger.info(f'Next: {next}')
-            flash('Login successful.')
             return redirect(next)
         flash('Invalid email or password.')
         logger.info(f'Login error')
