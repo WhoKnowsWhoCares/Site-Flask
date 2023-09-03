@@ -3,24 +3,30 @@ from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from .forms import LoginForm
 from app.models import User
+from loguru import logger
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+        logger.info('User authenticated')
         return redirect(url_for('main.index'))
     form = LoginForm()
     if request.method == 'POST':
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        if user is not None and user.verify_password(form.password.data):
+        logger.info(f'User: {user}')
+        if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
             next = request.args.get('next')
-            if next is None or not next.startswith('/'):
+            if not next:
                 next = url_for('main.index')
+            logger.info(f'Next: {next}')
             flash('Login successful.')
             return redirect(next)
         flash('Invalid email or password.')
+        logger.info(f'Login error')
         return redirect(url_for('auth.login'))
+    logger.info(f'Login form')
     return render_template('auth/sign-in.html', form=form)
 
 

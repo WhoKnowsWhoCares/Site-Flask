@@ -50,9 +50,6 @@ nosetests.xml
 nginx/site.conf
 systemd/gunicorn.service
 
-# Poetry lock
-poetry.lock
-
 #Dev files
 app/templates/examples/
 app/static/assets/img/
