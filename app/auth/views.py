@@ -9,25 +9,19 @@ from loguru import logger
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        logger.info('User authenticated')
         return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
-        logger.info(f'User: {user}')
         if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
-            flash('Login successful.')
             next = request.args.get('next')
-            if not next:
+            if next is None:
                 next = url_for('main.index')
-            logger.info(f'Next: {next}')
             flash('Login successful.')
             return redirect(next)
         flash('Invalid email or password.')
-        logger.info(f'Login error')
         return redirect(url_for('auth.login'))
-    logger.info(f'Login form')
     return render_template('auth/sign-in.html', form=form)
 
 

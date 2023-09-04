@@ -2,7 +2,11 @@ import os
 import random
 import string
 
+from loguru import logger
+from dotenv import load_dotenv
+
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv()
 
 class Config:
     SECRET_KEY  = os.getenv('SECRET_KEY', None)
@@ -37,7 +41,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
-    DB_USER     = os.getenv('DATABASE_USER', 'postgres')
+    DB_USER     = os.getenv('DATABASE_USER', '0.0.0.0')
     DB_PASSWORD = os.getenv('DATABASE_PASS', '')
     DB_HOST     = os.getenv('DATABASE_HOST', 'localhost')
     DB_PORT     = os.getenv('DATABASE_PORT', '5432')
