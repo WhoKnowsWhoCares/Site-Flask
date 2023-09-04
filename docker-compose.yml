@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  main:
+    container_name: site
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: curl --fail http://0.0.0.0:8000 || exit 1
+    command: ["gunicorn","-k","gevent","-b","0.0.0.0:8000", "wsgi:app"]
+    
+    # depends_on:
+    #   - db
+    # networks:
+    #   - db_network
+
+  # db:
+  #   image: postgres:14.7
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: alexander
+  #     POSTGRES_PASSWORD: docker
+  #     POSTGRES_DB: site_db
+  #   ports:
+  #    - "5442:5432"
+  #   networks:
+  #     - db_network
+  #   volumes:
+  #     - /var/lib/docker/volumes/postgresql_data/_data:db_data
+
+# networks:
+#   db_network:
+#     driver: bridge
+ 
