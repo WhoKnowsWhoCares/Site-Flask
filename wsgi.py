@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 from loguru import logger
 import logging
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+# log = logging.getLogger('werkzeug')
+# log.setLevel(logging.ERROR)
 logger.add("./logs/log_{time:YYYY-MM-DD}.log", level='INFO',
            rotation="00:01", retention="30 days",
            backtrace=True, diagnose=True)
