@@ -1,18 +1,11 @@
-<!-- Core -->
-<script async src="/static/assets/js/bootstrap.min.js"></script> <!-- верхняя панель -->
-<script async src="/static/assets/js/headroom.min.js"></script> <!-- выпадающцй список -->
-
-<!-- Vendor JS -->
-<script async src="/static/assets/js/smooth-scroll.polyfills.min.js"></script>
+<script src="/static/assets/js/jquery.min.js"></script> <!-- исчезновение алертов -->
+<script src="/static/assets/js/pixel.js"></script>
 <script src="/static/assets/js/vivus.min.js"></script> <!-- загрузка предстраницы -->
 
-
-<!-- Pixel JS -->
-<script src="/static/assets/js/pixel.js"></script>
-
-<script async src="/static/assets/js/jquery.min.js"></script> <!-- исчезновение алертов -->
+<script async src="/static/assets/js/bootstrap.min.js"></script> <!-- верхняя панель -->
+<script async src="/static/assets/js/headroom.min.js"></script> <!-- выпадающцй список -->
+<script async src="/static/assets/js/smooth-scroll.polyfills.min.js"></script>
 <script async src="/static/assets/js/util.js"></script> <!--исчезновение формы -->
-
 <script async src="/static/assets/js/other.js"></script>
 
 <script type="text/javascript">var submitted=false;</script>
@@ -28,8 +21,6 @@
   }, 1300);
 </script>
 <script type="text/javascript">
-    // Get the current page name from the URL
     var currentPage = location.pathname.split('/').pop() || 'home';
-    // Set the page title dynamically
     document.getElementById('pageTitle').innerHTML = currentPage;
 </script>
