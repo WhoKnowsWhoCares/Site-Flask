@@ -29,7 +29,7 @@
 </script>
 <script type="text/javascript">
     // Get the current page name from the URL
-    var currentPage = location.pathname.split('/').pop();
+    var currentPage = location.pathname.split('/').pop() || 'home';
     // Set the page title dynamically
     document.getElementById('pageTitle').innerHTML = currentPage;
 </script>
