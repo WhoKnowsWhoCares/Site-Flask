@@ -8,12 +8,14 @@ from dotenv import load_dotenv
 from loguru import logger
 import logging
 
+load_dotenv()
+
+logging_lvl = os.getenv('LOG_LEVEL', 'INFO') 
 log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
-logger.add("./logs/log_{time:YYYY-MM-DD}.log", level='WARNING',
+log.setLevel(logging_lvl)
+logger.add("./logs/log_{time:YYYY-MM-DD}.log", level=logging_lvl,
            rotation="00:01", retention="30 days",
            backtrace=True, diagnose=True)
-load_dotenv()
 
 app_config = os.getenv('FLASK_ENV') or 'default'
 app = create_app(app_config)
