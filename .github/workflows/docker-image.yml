@@ -17,14 +17,14 @@ env:
   SECRET_KEY: ${{secrets.SECRET_KEY}}
 
 env:
-  TG_USER_ID: ${{vars.TG_API_KEY}}
-  TG_API_KEY: ${{vars.TG_API_KEY}}  
-  DATABASE_HOST: ${{vars.DATABASE_HOST}}  
-  DATABASE_NAME: ${{vars.DATABASE_NAME}}  
-  DATABASE_PASS: ${{vars.DATABASE_PASS}}  
-  DATABASE_PORT: ${{vars.DATABASE_PORT}}  
-  DATABASE_USER: ${{vars.DATABASE_USER}}  
-  SECRET_KEY: ${{vars.SECRET_KEY}}  
+  TG_USER_ID: ${{secrets.TG_API_KEY}}
+  TG_API_KEY: ${{secrets.TG_API_KEY}}  
+  DATABASE_HOST: ${{secrets.DATABASE_HOST}}  
+  DATABASE_NAME: ${{secrets.DATABASE_NAME}}  
+  DATABASE_PASS: ${{secrets.DATABASE_PASS}}  
+  DATABASE_PORT: ${{secrets.DATABASE_PORT}}  
+  DATABASE_USER: ${{secrets.DATABASE_USER}}  
+  SECRET_KEY: ${{secrets.SECRET_KEY}}  
 
 jobs:
   build:
