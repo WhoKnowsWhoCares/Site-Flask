@@ -7,8 +7,7 @@ read -p "Your domain without protocol (for example, google.com): " project_domai
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -U pip
-pip install wheel
-pip install flask gunicorn
+pip install wheel flask gunicorn
 pip install -r requirements.txt
 
 sudo systemctl stop gunicorn
