@@ -24,7 +24,8 @@ ENV PYTHONDONTWRITEBYTECODE 1 \
     PYTHONUNBUFFERED=1
 ENV FLASK_APP=wsgi.py \
     FLASK_DEBUG=0 \
-    FLASK_ENV=production
+    FLASK_ENV=production \
+    LOG_LEVEL='WARNING'
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
@@ -35,7 +36,7 @@ WORKDIR /app
 # Necessary Files
 COPY /app/ ./app/
 COPY /migrations/ ./migrations/
-COPY .env config.py wsgi.py ./app/
+COPY config.py wsgi.py ./app/
 
 # Expose port
 EXPOSE 8000
