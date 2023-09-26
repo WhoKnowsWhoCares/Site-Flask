@@ -35,7 +35,7 @@ WORKDIR /app
 # Necessary Files
 COPY /app/ ./app/
 COPY /migrations/ ./migrations/
-COPY .env config.py wsgi.py ./
+COPY .env config.py wsgi.py ./app/
 
 # Expose port
 EXPOSE 8000
