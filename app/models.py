@@ -13,9 +13,9 @@ class UserRole(Enum):
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True)
-    username = db.Column(db.String(64), unique=True)
-    role = db.Column(db.Enum(UserRole), default=UserRole.USER)
+    email = db.Column(db.String(64), unique=True, nullable=False)
+    username = db.Column(db.String(64), unique=True, nullable=False)
+    role = db.Column(db.Enum(UserRole), default=UserRole.USER, nullable=False)
     password_hash = db.Column(db.String(256))
 
     def __init__(self, **kwargs):
