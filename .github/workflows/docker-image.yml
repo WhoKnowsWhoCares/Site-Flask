@@ -16,6 +16,16 @@ env:
   DATABASE_USER: ${{secrets.DATABASE_USER}}
   SECRET_KEY: ${{secrets.SECRET_KEY}}
 
+env:
+  TG_USER_ID: ${{vars.TG_API_KEY}}
+  TG_API_KEY: ${{vars.TG_API_KEY}}  
+  DATABASE_HOST: ${{vars.DATABASE_HOST}}  
+  DATABASE_NAME: ${{vars.DATABASE_NAME}}  
+  DATABASE_PASS: ${{vars.DATABASE_PASS}}  
+  DATABASE_PORT: ${{vars.DATABASE_PORT}}  
+  DATABASE_USER: ${{vars.DATABASE_USER}}  
+  SECRET_KEY: ${{vars.SECRET_KEY}}  
+
 jobs:
   build:
     runs-on: ubuntu-latest
