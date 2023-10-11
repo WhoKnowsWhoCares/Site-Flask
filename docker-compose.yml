@@ -10,7 +10,8 @@ services:
       - "8000:8000"
     healthcheck:
       test: curl --fail http://0.0.0.0:8000 || exit 1
-    command: ["gunicorn","-k","gevent","-b","0.0.0.0:8000", "wsgi:app"]
+    command: ["gunicorn","-k","gevent","-w","3","-b","0.0.0.0:8000", "wsgi:app"]
+    # command: ["python", "-m", "wsgi"]
     
     # depends_on:
     #   - db
@@ -32,6 +33,5 @@ services:
   #     - /var/lib/docker/volumes/postgresql_data/_data:db_data
 
 # networks:
-#   db_network:
-#     driver: bridge
+#   db_network
  
