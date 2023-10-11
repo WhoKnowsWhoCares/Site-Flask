@@ -10,10 +10,10 @@ import logging
 
 load_dotenv()
 
-logging_lvl = os.getenv('LOG_LEVEL', 'INFO') 
+# logging_lvl = os.getenv('LOG_LEVEL', 'INFO') 
 log = logging.getLogger('werkzeug')
-log.setLevel(logging_lvl)
-logger.add("./logs/log_{time:YYYY-MM-DD}.log", level=logging_lvl,
+log.setLevel('INFO')
+logger.add("./logs/log_{time:YYYY-MM-DD}.log", level='INFO',
            rotation="00:01", retention="30 days",
            backtrace=True, diagnose=True)
 
