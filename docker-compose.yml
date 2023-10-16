@@ -1,37 +1,62 @@
 version: '3.8'
 services:
-  main:
-    container_name: site
+  app:
+    container_name: site-flask-app
     restart: unless-stopped
+    # env_file:
+    #   - .env
+    # environment:
+    #   PGHOST: 'db'
+    #   PGDATABASE: ${DATABASE_NAME}
+    #   PGUSER: ${DATABASE_USER}
+    #   PGPASSWORD: ${DATABASE_PASS}
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
     healthcheck:
-      test: curl --fail http://0.0.0.0:8000 || exit 1
-    command: ["gunicorn","-k","gevent","-w","3","-b","0.0.0.0:8000", "wsgi:app"]
-    # command: ["python", "-m", "wsgi"]
-    
-    # depends_on:
-    #   - db
-    # networks:
-    #   - db_network
+      test: curl --fail -s http://localhost:8000/ || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      - db
+    networks:
+      - db_network
+    command: ["gunicorn","-k","gevent","-w","1","-b","0.0.0.0:8000", "wsgi:app"]
 
-  # db:
-  #   image: postgres:14.7
-  #   restart: always
-  #   environment:
-  #     POSTGRES_USER: alexander
-  #     POSTGRES_PASSWORD: docker
-  #     POSTGRES_DB: site_db
-  #   ports:
-  #    - "5442:5432"
-  #   networks:
-  #     - db_network
-  #   volumes:
-  #     - /var/lib/docker/volumes/postgresql_data/_data:db_data
+  db:
+    container_name: site-flask-db
+    image: postgres:14.7
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+    ports:
+     - "5442:5432"
+    networks:
+      - db_network
+    volumes:
+      - /var/lib/docker/volumes/postgresql_data/_data:/var/lib/postgresql/data
+      - ./db_init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
 
-# networks:
-#   db_network
+networks:
+  db_network:
+    driver: bridge
+
+
  

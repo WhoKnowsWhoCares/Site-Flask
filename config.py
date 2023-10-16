@@ -41,7 +41,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
 
-    DB_USER     = os.getenv('DATABASE_USER', '0.0.0.0')
+    DB_USER     = os.getenv('DATABASE_USER', '')
     DB_PASSWORD = os.getenv('DATABASE_PASS', '')
     DB_HOST     = os.getenv('DATABASE_HOST', 'localhost')
     DB_PORT     = os.getenv('DATABASE_PORT', '5432')
