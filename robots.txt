@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /panel.html
+Host: www.frants.site
+Sitemap: https://www.frants.site/sitemap.xml

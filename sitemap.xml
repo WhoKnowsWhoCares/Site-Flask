@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://frants.site/</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://frants.site/about</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/ihome</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/mlsport</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/trade4me</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/sd_art</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/auth/login?next=%2Fpanel</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://frants.site/auth/login</loc>
+  <lastmod>2023-11-20T12:15:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
