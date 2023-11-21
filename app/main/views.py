@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request
+from flask import redirect, render_template, url_for, request, send_from_directory
 from flask_login import login_required
 from .forms import MessageForm
 from . import main
@@ -7,6 +7,13 @@ import telebot
 
 bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
 
+@main.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt')
+
+@main.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml')
 
 @main.route('/')
 def index():
