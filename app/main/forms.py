@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, Regexp
+from wtforms.validators import DataRequired, Length, Email
+
 
 class MessageForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(1, 64)])
