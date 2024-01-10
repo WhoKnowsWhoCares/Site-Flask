@@ -3,7 +3,6 @@ from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from .forms import LoginForm
 from app.models import User
-from loguru import logger
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -31,4 +30,3 @@ def logout():
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('main.index'))
-

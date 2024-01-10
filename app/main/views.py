@@ -5,15 +5,18 @@ from . import main
 import os
 import telebot
 
-bot = telebot.TeleBot(os.getenv('TG_API_KEY'))
+bot = telebot.TeleBot(os.getenv('TG_API_KEY', ''))
+
 
 @main.route('/robots.txt')
 def robots():
     return send_from_directory('static', 'robots.txt')
 
+
 @main.route('/sitemap.xml')
 def sitemap():
     return send_from_directory('static', 'sitemap.xml')
+
 
 @main.route('/')
 def index():
@@ -53,6 +56,6 @@ def about():
         name = form.name.data
         email = form.email.data
         message = form.message.data
-        bot.send_message(os.getenv('TG_USER_ID'), f'User {name}, email {email}, sent message: {message}')
+        bot.send_message(os.getenv('TG_USER_ID', ''), f'User {name}, email {email}, sent message: {message}')
         return redirect(url_for('main.about'))
     return render_template('about.html', form=form)
