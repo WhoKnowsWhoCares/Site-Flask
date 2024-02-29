@@ -62,3 +62,8 @@ def about():
         )
         return redirect(url_for("main.about"))
     return render_template("about.html", form=form)
+
+
+@main.route("/textsummary", methods=["GET", "POST"])
+def textsummary():
+    return render_template("textsummary.html", iframe="http://localhost:8000")
