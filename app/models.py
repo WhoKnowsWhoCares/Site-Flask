@@ -1,5 +1,4 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
 from enum import Enum
 from . import db, login_manager
@@ -11,7 +10,7 @@ class UserRole(Enum):
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, nullable=False)
     username = db.Column(db.String(64), unique=True, nullable=False)
@@ -23,7 +22,7 @@ class User(UserMixin, db.Model):
 
     @property
     def password(self):
-        raise AttributeError('password is not a readable attribute')
+        raise AttributeError("password is not a readable attribute")
 
     @password.setter
     def password(self, password):
@@ -39,7 +38,7 @@ class User(UserMixin, db.Model):
         return self.can(UserRole.ADMIN)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return "<User %r>" % self.username
 
 
 class AnonymousUser(AnonymousUserMixin):
