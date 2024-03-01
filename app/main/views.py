@@ -1,11 +1,24 @@
-from flask import redirect, render_template, url_for, request, send_from_directory
-from flask_login import login_required
-from .forms import MessageForm
-from . import main
 import os
 import telebot
+import requests
+
+from flask import redirect, render_template, url_for, request, send_from_directory
+from flask_login import login_required
+from loguru import logger
+
+from .forms import MessageForm
+from . import main
+
 
 bot = telebot.TeleBot(os.getenv("TG_API_KEY", ""))
+
+
+def if_url_exist(url):
+    try:
+        return requests.head(url).status_code == requests.codes.ok
+    except Exception as e:
+        logger.info(f"Error while checking if url exist {e}")
+        return False
 
 
 @main.route("/robots.txt")
@@ -66,4 +79,18 @@ def about():
 
 @main.route("/textsummary", methods=["GET", "POST"])
 def textsummary():
-    return render_template("textsummary.html", iframe="http://localhost:8000")
+    textsummary_service = "http://10.0.0.6:6001"
+    if if_url_exist(textsummary_service):
+        return render_template("textsummary.html", iframe=textsummary_service)
+    else:
+        return render_template("/errors/error.html", message="Service is not available")
+
+
+@main.route("/newsparser")
+def newsparser():
+    return render_template("newsparser.html")
+
+
+@main.route("/mltoolsbot")
+def mltoolsbot():
+    return render_template("mltoolsbot.html")
