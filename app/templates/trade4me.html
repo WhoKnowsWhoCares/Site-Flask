@@ -72,56 +72,53 @@ Read about project, maybe pick up a tip or two. Nothing too fancy.">
         </div>
     </div>
 </div>
-<!-- <div class="section section-sm bg-gray-100">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-12 text-center">
-                <h2 class="display-3 mb-4">Global Macro level</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-6">
-            <div class="row justify-content-center">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section section-sm bg-primary-app">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-12 text-center">
-                <h2 class="display-3 mb-4">Company level</h2>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-6">
-            <div class="row justify-content-center">
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="section section-sm bg-gray-200">
     <div class="container">
-        <div class="row align-items-center justify-content-around">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-12 text-center mb-3">
-                    <h2 class="display-3 mb-3"> Daily-trading level </h2>
-                    <p class="lead"></p>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-12 text-center mb-3">
+                <h2 class="display-3 mb-3"> Daily-trading level </h2>
+                <p class="lead"></p>
+            </div>
+        
+            <div class="container">
+                <div class="row align-items-center justify-content-around">
+                    <div class="col-md-6 text-center text-md-left mb-3">
+                        <h4 class="mb-3">News Parser 
+                            <a href="https://github.com/whoknowswhocares/NewsParser" target="_blank" aria-label="github social link" class="icon-github me-3">
+                                <span class="fab fa-github"></span>
+                            </a>
+                        </h4>
+                        <p> Daily News for intraday trading - collected info for fast decision-making. 
+                            From various source get text info, store it, then using ML get summary and sentiment analysis.
+                            Based on user preferences sort all news and send as telegram notification only top of the list.
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card-body border-gray-300">
+                            <img src="../static/assets/images/trade4me/Architecture-NewsParser_dark.png" class="card-img-top zoomable" alt="News Parser scheme">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- <div class="col-md-12 col-xl-12 text-center text-md-left"> -->
-            <div class="col-md-6 text-center text-md-left mb-3">
-                <h4 class="mb-3">News Parser 
-                    <a href="https://github.com/whoknowswhocares/NewsParser" target="_blank" aria-label="github social link" class="icon-github me-3">
-                        <span class="fab fa-github"></span>
-                    </a>
-                </h4>
-                <p> Daily News for intraday trading - collected info for fast decision-making. 
-                    From various source get text info, store it, then using ML get summary and sentiment analysis.
-                    Based on user preferences sort all news and send as telegram notification only top of the list.
-                </p>
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="card-body border-gray-300">
-                    <img src="../static/assets/images/trade4me/Architecture-NewsParser_dark.png" class="card-img-top" alt="News Parser scheme">
+            <div class="container">
+                <div class="row align-items-center justify-content-around">
+                    <div class="col-md-6 text-center text-md-left mb-3">
+                        <h4 class="mb-3">
+                            <a href="{{ url_for('main.textsummary') }}">TextSummary</a>
+                            <a href="https://github.com/WhoKnowsWhoCares/Huggingface_TextSummary" target="_blank" aria-label="github social link" class="icon-github me-3">
+                                <span class="fab fa-github"></span>
+                            </a>
+                        </h4>
+                        <p> Dedicated service for Summarization and Sentiment of the text. For it I use dockerized FastAPI server with simple Gradio interface.
+                            Additionaly there are lazy loading for ML models to release resources and verification to prevent bots from constantly use this service.
+                            API available through base authentication.
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card-body border-gray-300">
+                            <img src="../static/assets/images/trade4me/textsummary.png" class="card-img-top rounded zoomable" alt="Text Summary interface">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

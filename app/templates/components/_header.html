@@ -38,10 +38,11 @@
                             Projects
                             <span class="fas fa-angle-down nav-link-arrow ms-1"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-megamenu-lg" aria-labelledby="componentsDropdown">
-                            <div class="row g-0">
-                                <div class="col ps-0 py-3">
-                                    <ul class="list-style-none">
+                        <div class="dropdown-menu dropdown-megamenu-sm px-0 p-lg-4" aria-labelledby="componentsDropdown">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h6 class="d-block mb-3 text-primary">Global</h6>
+                                    <ul class="list-style-none mb-0">
                                         <li class="mb-2 megamenu-item">
                                             <a class="dropdown-item" href="{{ url_for('main.ihome') }}">iHome</a>
                                         </li>
@@ -51,6 +52,20 @@
                                         <li class="mb-2 megamenu-item">
                                             <a class="dropdown-item" href="{{ url_for('main.trade4me') }}">Trade4Me</a>
                                         </li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="d-block mb-3 text-primary">Sub</h6>
+                                    <ul class="list-style-none mb-0">
+                                        <!-- <li class="mb-2 megamenu-item">
+                                            <a class="dropdown-item" href="{{ url_for('main.newsparser') }}">NewsParser</a>
+                                        </li> -->
+                                        <li class="mb-2 megamenu-item">
+                                            <a class="dropdown-item" href="{{ url_for('main.textsummary') }}">TextSummary</a>
+                                        </li>
+                                        <!-- <li class="mb-2 megamenu-item">
+                                            <a class="dropdown-item" href="{{ url_for('main.mltoolsbot') }}">MLToolsBot</a>
+                                        </li> -->
                                     </ul>
                                 </div>           
                             </div>                 
