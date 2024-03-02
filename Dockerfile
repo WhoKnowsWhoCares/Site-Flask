@@ -30,7 +30,6 @@ RUN apt-get update && apt-get install -y curl
 WORKDIR /app
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
-    
 COPY --from=builder /app/.venv /app/.venv
 
 # Necessary Files
