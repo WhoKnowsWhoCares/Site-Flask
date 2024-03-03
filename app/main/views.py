@@ -82,7 +82,6 @@ def about():
 @main.route("/textsummary", methods=["GET", "POST"])
 def textsummary():
     textsummary_service = "http://10.0.0.6:6001/"
-    # return render_template("textsummary.html", iframe=textsummary_service)
     if if_url_exist(textsummary_service):
         logger.info("Text summary service is available")
         return render_template("textsummary.html", iframe=textsummary_service)
