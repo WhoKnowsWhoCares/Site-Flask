@@ -15,7 +15,9 @@ bot = telebot.TeleBot(os.getenv("TG_API_KEY", ""))
 
 def if_url_exist(url):
     try:
-        return requests.head(url).status_code == requests.codes.ok
+        request = requests.get(url)
+        logger.info(f"Checking if url exist {url}: {request.status_code}")
+        return request.status_code == requests.codes.ok
     except Exception as e:
         logger.info(f"Error while checking if url exist {e}")
         return False
@@ -79,10 +81,13 @@ def about():
 
 @main.route("/textsummary", methods=["GET", "POST"])
 def textsummary():
-    textsummary_service = "http://10.0.0.6:6001"
+    textsummary_service = "http://10.0.0.6:6001/"
+    # return render_template("textsummary.html", iframe=textsummary_service)
     if if_url_exist(textsummary_service):
+        logger.info("Text summary service is available")
         return render_template("textsummary.html", iframe=textsummary_service)
     else:
+        logger.info("Text summary service is unavailable")
         return render_template("/errors/error.html", message="Service is not available")
 
 
