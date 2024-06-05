@@ -1,5 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from loguru import logger
 from . import auth
 from .forms import LoginForm
 from app.models import User
@@ -21,9 +22,9 @@ def login():
             flash("Login successful.")
             return redirect(next)
         flash("Invalid email or password.")
-        logger.info(f"Login error")
+        logger.info("Login error")
         return redirect(url_for("auth.login"))
-    logger.info(f"Login form")
+    logger.info("Login form")
     return render_template("auth/sign-in.html", form=form)
 
 
