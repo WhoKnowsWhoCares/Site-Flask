@@ -1,4 +1,4 @@
-FROM python:3.10-slim as builder
+FROM python:3.10-slim AS builder
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -11,12 +11,13 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN mkdir -p /app
 WORKDIR /app
+RUN apt-get update && apt-get install -y python3-dev libpq-dev
 RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev,test --no-root
 
 
-FROM python:3.10-slim as base
+FROM python:3.10-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONFAULTHANDLER=1 \
@@ -26,7 +27,7 @@ ENV FLASK_APP=wsgi.py \
     FLASK_ENV=production \
     LOG_LEVEL='WARNING'
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl libpq-dev
 WORKDIR /app
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"

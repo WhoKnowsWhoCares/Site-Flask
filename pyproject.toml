@@ -28,10 +28,12 @@ blinker = "^1.5"
 requests = "^2.28.2"
 telebot = "^0.0.5"
 wheel = "^0.40.0"
-pg8000 = "^1.29.4"
 loguru = "^0.7.1"
 gevent = "^23.9.0.post1"
 flask-socketio = "^5.3.5"
+gevent-websocket = "^0.10.1"
+pymysql = "^1.1.1"
+cryptography = "^43.0.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"

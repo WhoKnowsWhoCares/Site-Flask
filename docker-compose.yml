@@ -1,15 +1,9 @@
-version: "3.8"
 services:
   app:
     container_name: site-flask-app
     restart: unless-stopped
-    # env_file:
-    #   - .env
-    # environment:
-    #   PGHOST: 'db'
-    #   PGDATABASE: ${DATABASE_NAME}
-    #   PGUSER: ${DATABASE_USER}
-    #   PGPASSWORD: ${DATABASE_PASS}
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -22,29 +16,31 @@ services:
       retries: 3
       start_period: 10s
     depends_on:
-      - db
-    networks:
-      - db_network
+      db:
+        condition: service_healthy
     command:
       ["gunicorn", "-k", "gevent", "-w", "1", "-b", "0.0.0.0:8000", "wsgi:app"]
 
   db:
     container_name: site-flask-db
-    image: postgres:14.7
+    # image: postgres:14.7
+    image: mysql:8.0
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASS}
-    ports:
-      - "5442:5432"
-    networks:
-      - db_network
+      # POSTGRES_DB: ${DB_NAME}
+      # POSTGRES_USER: ${DB_USER}
+      # POSTGRES_PASSWORD: ${DB_PASS}
+      # POSTGRES_PORT: ${DB_PORT}
+      # POSTGRES_HOST: ${DB_HOST}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     volumes:
-      - /var/lib/docker/volumes/postgresql_data/_data:/var/lib/postgresql/data
-      - ./db_init:/docker-entrypoint-initdb.d
+      - ./db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+      # test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -54,7 +50,3 @@ services:
         limits:
           cpus: "1"
           memory: 1G
-
-networks:
-  db_network:
-    driver: bridge
