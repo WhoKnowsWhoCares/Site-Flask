@@ -10,7 +10,7 @@ from .forms import MessageForm
 from . import main
 
 
-bot = telebot.TeleBot(os.getenv("TG_API_KEY", ""))
+bot = telebot.TeleBot(os.getenv("TG_API_KEY", ":"))
 
 
 def if_url_exist(url):
