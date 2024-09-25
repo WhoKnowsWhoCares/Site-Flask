@@ -27,7 +27,7 @@ ENV FLASK_APP=wsgi.py \
     FLASK_ENV=production \
     LOG_LEVEL='WARNING'
 
-RUN apt-get update && apt-get install -y curl libpq-dev
+RUN apt-get update && apt-get install -y curl
 WORKDIR /app
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"

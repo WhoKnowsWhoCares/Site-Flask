@@ -1,0 +1,42 @@
+name: Docker Build
+
+on:
+  push:
+    branches: ["master", "prod"]
+  pull_request:
+    branches: ["master", "prod"]
+
+env:
+  REGISTRY: registry.frants.tech
+  IMAGE_NAME: site-flask
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to my Registry (${{ env.REGISTRY }})
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Find Package Version
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build And Push Backend
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          no-cache: true
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

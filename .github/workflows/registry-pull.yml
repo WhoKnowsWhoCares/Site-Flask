@@ -1,0 +1,62 @@
+name: Deploy by Runner
+
+on:
+  workflow_run:
+    workflows: ["Tests", "Docker Build"]
+    branches: ["prod"]
+    types:
+      - completed
+
+env:
+  PORT: 8000
+  ENV_FILE: .env
+
+jobs:
+  prepare-environment:
+    runs-on: self-hosted
+    steps:
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "docker-compose.yml"
+      - name: Stop containers
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: docker compose down
+      - name: Remove unused data
+        run: docker system prune -a -f
+      - name: Cleanup build folder
+        run: |
+          rm -rf ./* || true
+
+  deploy:
+    runs-on: self-hosted
+    needs: prepare-environment
+    steps:
+      - name: Checkout docker-compose file
+        uses: actions/checkout@v4
+        with:
+          ref: prod
+          sparse-checkout: |
+            docker-compose.yml
+          sparse-checkout-cone-mode: false
+      - name: Create env file
+        run: |
+          touch ${{ env.ENV_FILE }}
+          echo FLASK_APP=wsgi.py >> ${{ env.ENV_FILE }}
+          echo FLASK_ENV=production >> ${{ env.ENV_FILE }}
+          echo PORT=${{ env.PORT }} >> ${{ env.ENV_FILE }}
+          echo LOG_LEVEL=WARNING >> ${{ env.ENV_FILE }}
+          echo TG_USER_ID=${{ secrets.TG_USER_ID }} >> ${{ env.ENV_FILE }}
+          echo TG_API_KEY=${{ secrets.TG_API_KEY }} >> ${{ env.ENV_FILE }}
+          echo DB_HOST=db >> ${{ env.ENV_FILE }}
+          echo DB_NAME=${{ secrets.DB_NAME }} >> ${{ env.ENV_FILE }}
+          echo DB_USER=${{ secrets.DB_USER }} >> ${{ env.ENV_FILE }}
+          echo DB_USER_MAIL=${{ secrets.DB_USER_MAIL }} >> ${{ env.ENV_FILE }}
+          echo DB_PASS=${{ secrets.DB_PASS }} >> ${{ env.ENV_FILE }}
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> ${{ env.ENV_FILE }}
+
+      - name: Create data folder
+        run: mkdir ./db_data
+      - name: Run docker-compose
+        run: docker compose up -d

@@ -8,9 +8,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "${PORT}:${PORT}"
+    expose:
+      - ${PORT}
     healthcheck:
-      test: curl --fail -s http://localhost:8000/ || exit 1
+      test: curl --fail -s http://localhost:${PORT}/ || exit 1
       interval: 10s
       timeout: 5s
       retries: 3
@@ -19,7 +21,16 @@ services:
       db:
         condition: service_healthy
     command:
-      ["gunicorn", "-k", "gevent", "-w", "1", "-b", "0.0.0.0:8000", "wsgi:app"]
+      [
+        "gunicorn",
+        "-k",
+        "gevent",
+        "-w",
+        "3",
+        "-b",
+        "0.0.0.0:${PORT}",
+        "wsgi:app",
+      ]
 
   db:
     container_name: site-flask-db
