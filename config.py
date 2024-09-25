@@ -38,10 +38,7 @@ class DevConfig(Config):
 class TestConfig(Config):
     DEBUG = True
     TESTING = True
-
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        basedir, "db_data", "data-dev.sqlite"
-    )
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
 
 
 class ProdMySqlConfig(Config):

@@ -43,4 +43,3 @@ EXPOSE 8000
 
 # gunicorn
 CMD ["gunicorn","-k","gevent","-w","1","-b","0.0.0.0:8000", "wsgi:app"]
-# CMD ["python", "-m", "wsgi"]

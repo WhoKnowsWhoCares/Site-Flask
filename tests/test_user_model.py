@@ -6,14 +6,12 @@ from app.models import db, User, AnonymousUser, UserRole
 class UserModelTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app("testing")
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        db.create_all()
+        # with self.app.app_context():
+        #     db.create_all()
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-        self.app_context.pop()
+        with self.app.app_context():
+            db.drop_all()
 
     def test_password_setter(self):
         u = User(username="john", email="john@example.com", password="cat")

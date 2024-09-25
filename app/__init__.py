@@ -34,8 +34,8 @@ def create_app(config_name):
 
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
-    # with app.app_context():
-    #     db.create_all()
-    #     create_user()
+    with app.app_context():
+        db.create_all()
+        # create_user()
 
     return app
