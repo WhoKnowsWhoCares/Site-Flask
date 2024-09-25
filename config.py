@@ -20,7 +20,7 @@ class Config:
     TESTING = False
     DEVELOPMENT = False
     API_PAGINATION = 10
-    PROPAGATE_EXCEPTIONS = True  # needed due to Flask-Restful not passing them up
+    PROPAGATE_EXCEPTIONS = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
