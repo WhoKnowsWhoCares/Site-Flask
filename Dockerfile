@@ -11,7 +11,7 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN mkdir -p /app
 WORKDIR /app
-RUN apt-get update && apt-get install -y python3-dev libpq-dev
+RUN apt-get update && apt-get install -y python3-dev
 RUN pip install poetry
 COPY poetry.lock pyproject.toml ./
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev,test --no-root
