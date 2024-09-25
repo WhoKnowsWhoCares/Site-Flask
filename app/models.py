@@ -3,10 +3,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, AnonymousUserMixin
 from flask_sqlalchemy import SQLAlchemy
 from enum import Enum
+from . import db, login_manager
 
-db = SQLAlchemy()
-login_manager = LoginManager()
-login_manager.login_view = "auth.login"
+# db = SQLAlchemy()
+# login_manager = LoginManager()
+# login_manager.login_view = "auth.login"
 
 
 class UserRole(Enum):
