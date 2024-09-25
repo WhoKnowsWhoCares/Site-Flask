@@ -13,7 +13,7 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", None)
     if not SECRET_KEY:
         SECRET_KEY = "".join(random.choice(string.ascii_lowercase) for i in range(32))
-    TG_API_KEY = os.getenv("TG_API_KEY", None)
+    TG_API_KEY = os.getenv("TG_API_KEY", ":")
     TG_USER_ID = os.getenv("TG_USER_ID", None)
 
     DEBUG = False
