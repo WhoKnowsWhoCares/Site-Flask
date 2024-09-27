@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: registry.frants.tech
-  IMAGE_NAME: site-flask
+  IMAGE_NAME: siteflask
 
 jobs:
   build:
@@ -16,6 +16,12 @@ jobs:
     permissions:
       packages: write
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -33,7 +39,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build And Push Backend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           no-cache: true
