@@ -1,5 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from urllib.parse import urlparse
 from loguru import logger
 from . import auth
 from .forms import LoginForm
@@ -16,11 +17,11 @@ def login():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and user.verify_password(form.password.data):
             login_user(user, remember=True)
-            next = request.args.get("next")
-            if next is None:
-                next = url_for("main.index")
-            flash("Login successful.")
-            return redirect(next)
+            next = request.args.get("next", "").replace("\\", "")
+            if next and not urlparse(next).netloc and not urlparse(next).scheme:
+                flash("Login successful.")
+                return redirect(next)
+
         flash("Invalid email or password.")
         logger.info("Login error")
         return redirect(url_for("auth.login"))
