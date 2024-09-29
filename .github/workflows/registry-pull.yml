@@ -27,7 +27,7 @@ jobs:
         run: docker system prune -a -f
       - name: Cleanup build folder
         run: |
-          rm -rf ./* || true
+          find . -maxdepth 1 ! -name db_data -exec rm -rf {} \;
 
   deploy:
     runs-on: self-hosted

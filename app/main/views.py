@@ -33,6 +33,16 @@ def sitemap():
     return send_from_directory("static", "sitemap.xml")
 
 
+@main.route("/logo.svg")
+def logo():
+    return send_from_directory("static/assets/favicon", "favicon.svg")
+
+
+@main.route("/favicon.ico")
+def favicon():
+    return send_from_directory("static/assets/favicon", "favicon.ico")
+
+
 @main.route("/")
 def index():
     return render_template("index.html")
