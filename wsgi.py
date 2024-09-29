@@ -30,11 +30,13 @@ socketio = SocketIO(app)
 
 @app.cli.command("create_user")
 def create_user_command():
+    logger.info("create_user_command")
     create_user()
 
 
 @app.shell_context_processor
 def make_shell_context():
+    logger.info("shell_context_processor")
     return dict(db=db, User=User, UserRole=UserRole)
 
 
