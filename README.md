@@ -5,10 +5,11 @@
 
 This site on Flask mainly for personal usage, but it could be used as template for other sites on flask.
 In the description you could find how to use it.
-There are supported two ways for run site (classic and in docker).
-Also exist functions for privacy based on users credentials.
-Tests examples if you will need it later.
-Connected to the telegram bot to send some events from site.
+
+- There are supported two ways for run site (classic and in docker).
+- Also exist functions for privacy based on users credentials.
+- Tests examples if you will need it later.
+- Connected to the telegram bot to send some events from site.
 
 ## How to install and run
 
