@@ -16,9 +16,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and user.verify_password(form.password.data):
-            login_user(user, remember=True)
-            next = request.args.get("next", "").replace("\\", "")
+            next = request.args.get("next", "/")
             if next and not urlparse(next).netloc and not urlparse(next).scheme:
+                login_user(user, remember=True)
                 flash("Login successful.")
                 return redirect(next)
 
