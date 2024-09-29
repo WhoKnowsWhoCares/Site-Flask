@@ -27,7 +27,7 @@ jobs:
         run: docker system prune -a -f
       - name: Cleanup build folder
         run: |
-          find . -maxdepth 1 ! -name db_data -exec rm -rf {} \;
+          rm -rf ./* || true
 
   deploy:
     runs-on: self-hosted
@@ -56,7 +56,5 @@ jobs:
           echo DB_PASS=${{ secrets.DB_PASS }} >> ${{ env.ENV_FILE }}
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> ${{ env.ENV_FILE }}
 
-      - name: Create data folder
-        run: mkdir ./db_data
       - name: Run docker-compose
         run: docker compose up -d

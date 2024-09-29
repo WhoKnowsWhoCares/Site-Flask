@@ -52,6 +52,7 @@ build:
 To run docker compose use:
 
 ```
+$ docker volume create site_flask_data
 $ docker compose up -d
 ```
 
