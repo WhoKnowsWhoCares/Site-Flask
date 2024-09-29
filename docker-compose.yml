@@ -49,7 +49,8 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
-      - site_flask_data:/var/lib/postgresql/data
+      # - site_flask_data:/var/lib/postgresql/data
+      - site_flask_data:/var/lib/mysql
     healthcheck:
       # test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
