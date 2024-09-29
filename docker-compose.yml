@@ -2,11 +2,12 @@ services:
   app:
     container_name: site-flask-app
     restart: unless-stopped
+    image: registry.frants.tech/siteflask:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     env_file:
       - .env
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
       - "${PORT}:${PORT}"
     expose:

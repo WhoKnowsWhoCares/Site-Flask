@@ -15,7 +15,7 @@ There are two ways to install - classic and docker
 
 #### Classic installation
 
-Here we install nginx, database such as postgres or mysql, than run shell script to create python environment with additional pakages from requirement.txt and configure gunicorn and nginx in systemd.
+Here we install nginx, database such as postgres or mysql, then run shell script to create python environment with additional pakages from requirement.txt and configure gunicorn and nginx in systemd.
 
 ```
 $ sudo apt update
